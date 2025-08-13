@@ -1,15 +1,16 @@
 import { StyleSheet } from 'react-native';
+import { colors } from '@/styles/colors';
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: colors.background.primary,
   },
   logo: {
     height: 34,
     width: 134,
+    paddingBottom: 8,
   },
-  button: {},
 });
