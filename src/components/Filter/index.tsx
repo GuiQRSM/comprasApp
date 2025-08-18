@@ -1,7 +1,7 @@
 import { TouchableOpacity, TouchableOpacityProps, Text } from 'react-native';
 import { styles } from './styles';
 import { FilterStatus } from '@/types/FilterStatus';
-import { CircleCheck, CircleDashed } from 'lucide-react-native';
+import { StatusIcon } from '../StatusIcon';
 
 type ContentProps = TouchableOpacityProps & {
   status: FilterStatus;
@@ -16,8 +16,8 @@ export function Content({ status, isActive, ...rest }: ContentProps) {
       activeOpacity={0.8}
       {...rest}
     >
-      <CircleCheck size={15} color={'black'} />
-
+      //componete para deixar a renderização condicional
+      <StatusIcon status={status} />
       <Text style={styles.title}>{status === FilterStatus.DONE ? 'Comprados' : 'Pendentes'}</Text>
     </TouchableOpacity>
   );
