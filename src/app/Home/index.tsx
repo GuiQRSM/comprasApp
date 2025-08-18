@@ -2,6 +2,8 @@ import { View, Image } from 'react-native';
 import { styles } from './styles';
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
+import { Content } from '@/components/Filter';
+import { FilterStatus } from '@/types/FilterStatus';
 
 export function Home() {
   return (
@@ -13,7 +15,10 @@ export function Home() {
         <Button title="Entrar" activeOpacity={0.7} onPress={() => console.log('Entrar')} />
       </View>
 
-      <View style={styles.content}></View>
+      <View style={styles.content}>
+        <Content status={FilterStatus.DONE} isActive />
+        <Content status={FilterStatus.PENDING} isActive={false} />
+      </View>
     </View>
   );
 }
