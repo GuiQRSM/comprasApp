@@ -9,6 +9,7 @@ export const colors = {
   },
   gray: {
     light: '#c3c5cb',
+    main: '#7f8083ff',
   },
   background: {
     primary: '#D0D2D8',
