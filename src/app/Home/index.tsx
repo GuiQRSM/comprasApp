@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, Image, TouchableOpacity, Text, FlatList } from 'react-native';
+import { View, Image, TouchableOpacity, Text, FlatList, Alert } from 'react-native';
 import { styles } from './styles';
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
@@ -8,23 +8,32 @@ import { FilterStatus } from '@/types/FilterStatus';
 import { Item } from '@/components/Item';
 
 const FILTER_STATUS: FilterStatus[] = [FilterStatus.DONE, FilterStatus.PENDING];
-/*Linha de array a ser estudada*/
-const ITEMS = [
-  { id: '1', status: FilterStatus.DONE, description: '1 pacote de café' },
-  { id: '2', status: FilterStatus.PENDING, description: '3 pacotes de macarrão' },
-  { id: '3', status: FilterStatus.DONE, description: '2 pacotes de arroz' },
-];
+const [items, setItems] = useState<any>([]);
+const [filter, setFilter] = useState(FilterStatus.PENDING);
+const [description, setDescription] = useState('');
 
 export function Home() {
-  const [filter, setFilter] = useState(FilterStatus.PENDING);
+  function handleAdd() {
+    if (!description.trim()) {
+      return Alert.alert('Adicionar', 'Informe a descrição para adicionar');
+    }
+
+    const newItem = {
+      id: Math.random().toString(36).substring(2),
+      description,
+      status: FilterStatus.PENDING,
+    };
+
+    setItems((prevState: any) => [...prevState, newItem]);
+  }
 
   return (
     <View style={styles.container}>
       <Image source={require('@/assets/logo.png')} style={styles.logo} />
 
       <View style={styles.form}>
-        <Input placeHolder="O que você precisa comprar?" />
-        <Button title="Entrar" activeOpacity={0.7} onPress={() => console.log('Entrar')} />
+        <Input placeHolder="O que você precisa comprar?" onChangeText={setDescription} />
+        <Button title="Entrar" activeOpacity={0.7} onPress={handleAdd} />
       </View>
 
       <View style={styles.content}>
@@ -43,7 +52,7 @@ export function Home() {
           </TouchableOpacity>
         </View>
         <FlatList
-          data={ITEMS}
+          data={items}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <Item
