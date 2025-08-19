@@ -8,7 +8,11 @@ import { Item } from '@/components/Item';
 
 const FILTER_STATUS: FilterStatus[] = [FilterStatus.DONE, FilterStatus.PENDING];
 /*Linha de array a ser estudada*/
-const ITEMS = Array.from({ length: 100 }).map((_, index) => String(index));
+const ITEMS = [
+  { id: '1', status: FilterStatus.DONE, description: '1 pacote de café' },
+  { id: '2', status: FilterStatus.PENDING, description: '3 pacotes de macarrão' },
+  { id: '3', status: FilterStatus.DONE, description: '2 pacotes de arroz' },
+];
 
 export function Home() {
   return (
@@ -36,13 +40,18 @@ export function Home() {
         </View>
         <FlatList
           data={ITEMS}
-          keyExtractor={(item) => item}
+          keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <Item
-              data={{ status: FilterStatus.DONE, description: item }}
+              data={item}
               onStatus={() => console.log('Change status')}
               onRemove={() => console.log('Remove item')}
             />
+          )}
+          ItemSeparatorComponent={() => <View style={styles.separator} />}
+          contentContainerStyle={styles.listContent}
+          ListEmptyComponent={() => (
+            <Text style={styles.emptyText}>Não há compras registradas</Text>
           )}
         />
       </View>

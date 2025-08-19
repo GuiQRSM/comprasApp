@@ -45,4 +45,20 @@ export const styles = StyleSheet.create({
     color: colors.gray.main,
     fontWeight: '600',
   },
+  separator: {
+    width: '100%',
+    height: 1,
+    backgroundColor: colors.gray.light,
+    marginVertical: 16,
+  },
+  listContent: {
+    paddingTop: 24,
+    paddingBottom: 62,
+  },
+  emptyText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: colors.gray.main,
+    textAlign: 'center',
+  },
 });
