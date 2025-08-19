@@ -4,6 +4,7 @@ import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import { Content } from '@/components/Filter';
 import { FilterStatus } from '@/types/FilterStatus';
+import { Item } from '@/components/Item';
 
 const FILTER_STATUS: FilterStatus[] = [FilterStatus.DONE, FilterStatus.PENDING];
 
@@ -21,7 +22,8 @@ export function Home() {
         <View style={styles.header}>
           {FILTER_STATUS.map((status) => (
             <Content
-              /*Cada componente em conexto de lista deve ter uma key*/ key={status}
+              /*Cada componente em conexto de lista deve ter uma key*/
+              key={status}
               status={status}
               isActive
             />
@@ -30,6 +32,12 @@ export function Home() {
             <Text style={styles.clearText}>Limpar</Text>
           </TouchableOpacity>
         </View>
+
+        <Item
+          data={{ status: FilterStatus.PENDING, description: 'Banana' }}
+          onStatus={() => console.log('Status changed')}
+          onRemove={() => console.log('Item removed')}
+        />
       </View>
     </View>
   );

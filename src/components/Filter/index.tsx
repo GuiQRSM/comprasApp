@@ -16,7 +16,7 @@ export function Content({ status, isActive, ...rest }: ContentProps) {
       activeOpacity={0.8}
       {...rest}
     >
-      <StatusIcon /*componete para deixar a renderização condicional*/ status={status} />
+      <StatusIcon status={status} /*componete para deixar a renderização condicional*/ />
       <Text style={styles.title}>{status === FilterStatus.DONE ? 'Comprados' : 'Pendentes'}</Text>
     </TouchableOpacity>
   );
