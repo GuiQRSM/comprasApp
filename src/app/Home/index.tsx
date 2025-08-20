@@ -7,12 +7,12 @@ import { Content } from '@/components/Filter';
 import { FilterStatus } from '@/types/FilterStatus';
 import { Item } from '@/components/Item';
 
-const FILTER_STATUS: FilterStatus[] = [FilterStatus.DONE, FilterStatus.PENDING];
-const [items, setItems] = useState<any>([]);
-const [filter, setFilter] = useState(FilterStatus.PENDING);
-const [description, setDescription] = useState('');
-
 export function Home() {
+  const FILTER_STATUS: FilterStatus[] = [FilterStatus.DONE, FilterStatus.PENDING];
+  const [items, setItems] = useState<any>([]);
+  const [filter, setFilter] = useState(FilterStatus.PENDING);
+  const [description, setDescription] = useState('');
+
   function handleAdd() {
     if (!description.trim()) {
       return Alert.alert('Adicionar', 'Informe a descrição para adicionar');
