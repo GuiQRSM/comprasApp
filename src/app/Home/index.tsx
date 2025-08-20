@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { View, Image, TouchableOpacity, Text, FlatList, Alert } from 'react-native';
 import { styles } from './styles';
 import { Button } from '@/components/Button';
@@ -26,6 +26,10 @@ export function Home() {
 
     setItems((prevState: any) => [...prevState, newItem]);
   }
+
+  useEffect(() => {
+    console.log();
+  }, []);
 
   return (
     <View style={styles.container}>
