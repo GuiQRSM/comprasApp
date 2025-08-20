@@ -25,4 +25,5 @@ async function getByStatus(status: FilterStatus): Promise<itemStorage[]> {
 
 export const itemsStorage = {
   get,
+  getByStatus,
 };
