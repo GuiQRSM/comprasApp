@@ -28,14 +28,16 @@ export function Home() {
     };
 
     await itemsStorage.add(newItem);
-    await getItems();
+    await itemsByStatus();
 
-    setItems((prevState: any) => [...prevState, newItem]);
+    setFilter(FilterStatus.PENDING);
+    Alert.alert('Adicionado', `adiconado ${description}`);
+    setDescription('');
   }
 
-  async function getItems() {
+  async function itemsByStatus() {
     try {
-      const response = await itemsStorage.get();
+      const response = await itemsStorage.getByStatus(filter);
       setItems(response);
     } catch (error) {
       console.log(error);
@@ -44,15 +46,19 @@ export function Home() {
   }
 
   useEffect(() => {
-    getItems();
-  }, []);
+    itemsByStatus();
+  }, [filter]);
 
   return (
     <View style={styles.container}>
       <Image source={require('@/assets/logo.png')} style={styles.logo} />
 
       <View style={styles.form}>
-        <Input placeHolder="O que você precisa comprar?" onChangeText={setDescription} />
+        <Input
+          placeHolder="O que você precisa comprar?"
+          onChangeText={setDescription}
+          value={description}
+        />
         <Button title="Entrar" activeOpacity={0.7} onPress={handleAdd} />
       </View>
 

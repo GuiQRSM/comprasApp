@@ -28,7 +28,7 @@ async function save(items: ItemStorage[]): Promise<void> {
     //JSON.stringify converte um objeto em uma string
     await AsyncStorage.setItem(ITEMS_STOREGE_KEY, JSON.stringify(items));
   } catch (error) {
-    throw new Error('SAVE_ITEMS ' + error);
+    throw new Error('SAVE_ITEMS' + error);
   }
 }
 
