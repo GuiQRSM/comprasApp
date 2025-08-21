@@ -14,7 +14,7 @@ async function get(): Promise<ItemStorage[]> {
     const storage = await AsyncStorage.getItem(ITEMS_STOREGE_KEY);
     return storage ? JSON.parse(storage) : [];
   } catch (error) {
-    throw new Error('GET_ITEMS ' + error);
+    throw new Error('GET_ITEMS: ' + error);
   }
 }
 
@@ -28,7 +28,7 @@ async function save(items: ItemStorage[]): Promise<void> {
     //JSON.stringify converte um objeto em uma string
     await AsyncStorage.setItem(ITEMS_STOREGE_KEY, JSON.stringify(items));
   } catch (error) {
-    throw new Error('SAVE_ITEMS' + error);
+    throw new Error('SAVE_ITEMS: ' + error);
   }
 }
 
@@ -49,9 +49,18 @@ async function remove(id: string): Promise<void> {
   await save(updatedItems);
 }
 
+async function clear(): Promise<void> {
+  try {
+    await AsyncStorage.removeItem(ITEMS_STOREGE_KEY);
+  } catch (error) {
+    throw new Error('CLEAR_ITEMS: ' + error);
+  }
+}
+
 export const itemsStorage = {
   get,
   getByStatus,
   add,
   remove,
+  clear,
 };

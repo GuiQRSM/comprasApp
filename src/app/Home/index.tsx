@@ -55,6 +55,23 @@ export function Home() {
     }
   }
 
+  function handleClear() {
+    Alert.alert('Limpar', 'Deseja remover todos?', [
+      { text: 'Sim', onPress: () => onClear() },
+      { text: 'Não', style: 'cancel' },
+    ]);
+  }
+
+  async function onClear() {
+    try {
+      await itemsStorage.clear();
+      setItems([]);
+    } catch (error) {
+      console.log(error);
+      Alert.alert('Erro', 'Não foi possível remover todos.');
+    }
+  }
+
   useEffect(() => {
     itemsByStatus();
   }, [filter]);
@@ -69,7 +86,7 @@ export function Home() {
           onChangeText={setDescription}
           value={description}
         />
-        <Button title="Entrar" activeOpacity={0.7} onPress={handleAdd} />
+        <Button title="Adcionar" activeOpacity={0.7} onPress={handleAdd} />
       </View>
 
       <View style={styles.content}>
@@ -83,7 +100,7 @@ export function Home() {
               onPress={() => setFilter(status)}
             />
           ))}
-          <TouchableOpacity style={styles.clearButton}>
+          <TouchableOpacity style={styles.clearButton} onPress={handleClear}>
             <Text style={styles.clearText}>Limpar</Text>
           </TouchableOpacity>
         </View>
