@@ -6,10 +6,13 @@ import { Input } from '@/components/Input';
 import { Content } from '@/components/Filter';
 import { FilterStatus } from '@/types/FilterStatus';
 import { Item } from '@/components/Item';
+import { itemsStorage, ItemStorage } from '@/storage/itemsStorage';
 
+const FILTER_STATUS: FilterStatus[] = [FilterStatus.DONE, FilterStatus.PENDING];
 export function Home() {
-  const FILTER_STATUS: FilterStatus[] = [FilterStatus.DONE, FilterStatus.PENDING];
-  const [items, setItems] = useState<any>([]);
+  //armazanar na memoria os dados que estão no dispositivo
+  //useState é um hook que permite armazenar o estado de uma variável
+  const [items, setItems] = useState<ItemStorage[]>([]);
   const [filter, setFilter] = useState(FilterStatus.PENDING);
   const [description, setDescription] = useState('');
 
@@ -27,8 +30,18 @@ export function Home() {
     setItems((prevState: any) => [...prevState, newItem]);
   }
 
+  async function getItems() {
+    try {
+      const response = await itemsStorage.get();
+      setItems(response);
+    } catch (error) {
+      console.log(error);
+      Alert.alert('Erro', 'Não foi possível filtrar os itens.');
+    }
+  }
+
   useEffect(() => {
-    console.log();
+    getItems();
   }, []);
 
   return (
