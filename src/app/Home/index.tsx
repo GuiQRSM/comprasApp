@@ -72,7 +72,7 @@ export function Home() {
     }
   }
 
-  async function handleToggleStatus(id: string) {
+  async function handleToggleItemStatus(id: string) {
     try {
       await itemsStorage.toggleStatus(id);
       await itemsByStatus();
@@ -120,7 +120,7 @@ export function Home() {
           renderItem={({ item }) => (
             <Item
               data={item}
-              onStatus={() => console.log('status')}
+              onStatus={() => handleToggleItemStatus(item.id)}
               onRemove={() => handleRemove(item.id)}
             />
           )}
