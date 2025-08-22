@@ -72,6 +72,16 @@ export function Home() {
     }
   }
 
+  async function handleToggleStatus(id: string) {
+    try {
+      await itemsStorage.toggleStatus(id);
+      await itemsByStatus();
+    } catch (error) {
+      console.log(error);
+      Alert.alert('Erro', 'Não foi possível alterar o status.');
+    }
+  }
+
   useEffect(() => {
     itemsByStatus();
   }, [filter]);
@@ -86,7 +96,7 @@ export function Home() {
           onChangeText={setDescription}
           value={description}
         />
-        <Button title="Adcionar" activeOpacity={0.7} onPress={handleAdd} />
+        <Button title="Adicionar" activeOpacity={0.7} onPress={handleAdd} />
       </View>
 
       <View style={styles.content}>
@@ -110,7 +120,7 @@ export function Home() {
           renderItem={({ item }) => (
             <Item
               data={item}
-              onStatus={() => console.log('Change status')}
+              onStatus={() => console.log('status')}
               onRemove={() => handleRemove(item.id)}
             />
           )}
